@@ -1,0 +1,6 @@
+h1
+  | All Products
+- @products.each do |product|
+  p
+    = product.title
+    = link_to 'Create Review', new_product_review_path(product.id)
