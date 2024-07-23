@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
     # TODO: Create reviews in background. No need to show errors (if any) to users, it's fine to skip creating the review silently when some validations fail.
 
     tags = tags_with_default(review_params)
-    Review.create(review_params)
+    SubmitReviewJob.perform_async(review_params.to_json)
 
     flash[:notice] = 'Review is being created in background. It might take a moment to show up'
     redirect_to action: :index, shop_id: Product.find_by(id: review_params[:product_id]).shop_id
