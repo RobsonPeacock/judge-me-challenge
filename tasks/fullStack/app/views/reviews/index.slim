@@ -1,6 +1,7 @@
 - @data.each do |datum|
   .product-title
     | Product #{datum[:product].title}
+    = link_to 'Create Review', new_review_path(product_id: datum[:product].id)
 
   - datum[:reviews].each do |review|
     .rating

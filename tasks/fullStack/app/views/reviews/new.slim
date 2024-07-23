@@ -1,0 +1,8 @@
+<h5>Shop Name</h5>
+= @product.shop.name
+
+<h5>Product Name</h5>
+
+= @product.title
+
+= render partial: 'form', locals: { product_id: @product.id }

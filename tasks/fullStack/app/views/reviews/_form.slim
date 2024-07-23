@@ -1,0 +1,22 @@
+= form_for @review do |f|
+
+  p
+    = f.hidden_field :product_id, value: product_id
+
+  p
+    = f.label :rating
+  p
+    = f.number_field :rating, min: 0, max: 5.0
+
+  p
+    = f.label :name
+
+  p
+    = f.text_field :reviewer_name
+
+  p
+    = f.label :comment
+  p
+    = f.text_area :body
+  p
+    = f.submit "Submit"
