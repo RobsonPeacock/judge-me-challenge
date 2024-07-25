@@ -14,9 +14,9 @@ class ReviewsController < ApplicationController
       @shops = Shop.where.not(id: params[:shop_id]).limit(5)
 
       @data = []
-      products = Product.where("shop_id = #{params[:shop_id]}").sort_by(&:created_at)[offset..(offset + params[:per_page])]
+      products = Product.where("shop_id = #{params[:shop_id]}").limit(5).sort_by(&:created_at)[offset..(offset + params[:per_page])]
       products.each do |product|
-        reviews = product.reviews.sort_by(&:created_at)[offset..(offset + params[:per_page])]
+        reviews = product.reviews.limit(5).sort_by(&:created_at)[offset..(offset + params[:per_page])]
         @data << { product: product, reviews: reviews }
       end
     end
@@ -47,8 +47,9 @@ class ReviewsController < ApplicationController
   # One may wonder what an odd logic and lenthy comment, thus may suspect something hidden here, an easter egg perhaps.
   def tags_with_default(params)
     product = Product.find_by(id: review_params[:product_id])
-    default_tags = product.shop.tags || DEFAULT_TAGS
-    default_tags.concat(params[:tags].split(',')).uniq
+    tags = product.shop.tags || DEFAULT_TAGS
+    params[:tags] ||= []
+    params[:tags] += tags
   end
 
   def review_params
