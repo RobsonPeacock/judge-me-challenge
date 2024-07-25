@@ -4,6 +4,8 @@ class ReviewsController < ApplicationController
   DEFAULT_TAGS = ['default']
 
   def index
+    params[:shop_id] ||= 1
+
     if params[:shop_id].present? && Shop.where("id = #{params[:shop_id]}").present?
       params[:per_page] ||= 10
       offset = params[:page].to_i * params[:per_page]
