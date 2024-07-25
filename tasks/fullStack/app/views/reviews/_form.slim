@@ -3,20 +3,27 @@
   p
     = f.hidden_field :product_id, value: product_id
 
-  p
-    = f.label :rating
-  p
-    = f.number_field :rating, min: 0, max: 5.0
+  h6
+    = f.label :rating, class: 'form-label text-black-50'
+
+  = f.hidden_field :rating, required: true
+
+  .rating.text-start.mb-2
+    = f.collection_radio_buttons(:rating, [[5],[4],[3],[2],[1]], :first, :last, required: true) do |star|
+      = star.radio_button(id: "rating-#{star.value}", class: "form-check-input")
+      = star.label(for: "rating-#{star.value}")
+        i.fas.fa-2x.fa-star
+
+  h6
+    = f.label :name, class: 'form-label text-black-50'
 
   p
-    = f.label :name
+    = f.text_field :reviewer_name, class: 'form-control', placeholder: 'Enter your name'
 
+  h6
+    = f.label :comment, class: 'form-label text-black-50'
   p
-    = f.text_field :reviewer_name
-
-  p
-    = f.label :comment
-  p
-    = f.text_area :body
-  p
-    = f.submit "Submit"
+    = f.text_area :body, class: 'form-control', rows: 10, placeholder: 'Write your review here'
+  
+  .d-grid.gap-2.col-3.max-auto
+    = f.submit "Submit Review", class: 'btn btn-primary'

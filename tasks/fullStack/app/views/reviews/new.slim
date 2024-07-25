@@ -1,8 +1,16 @@
-<h5>Shop Name</h5>
-= @product.shop.name
+.container.my-5
+  .row.justify-content-center
+    .col-lg-9
+      .pad-bg
+        .row.g-3
+          .col-md-6
+            h5.text-black-50
+              | Shop Name
+            = @product.shop.name
+          .col-md-6
+            h5.text-black-50
+              | Product Name
+            = @product.title
 
-<h5>Product Name</h5>
-
-= @product.title
-
-= render partial: 'form', locals: { product_id: @product.id }
+          .col-md-12
+            = render partial: 'form', locals: { product_id: @product.id }
