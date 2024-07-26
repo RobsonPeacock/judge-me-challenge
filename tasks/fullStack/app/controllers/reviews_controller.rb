@@ -5,12 +5,12 @@ class ReviewsController < ApplicationController
 
   def index
     params[:shop_id] ||= 1
+    @shop = Shop.find(params[:shop_id])
 
-    if params[:shop_id].present? && Shop.where("id = #{params[:shop_id]}").present?
+    if @shop.present?
       params[:per_page] ||= 10
       offset = params[:page].to_i * params[:per_page]
 
-      @shop = Shop.find(params[:shop_id])
       @shops = Shop.where.not(id: params[:shop_id]).limit(5)
 
       @data = []
