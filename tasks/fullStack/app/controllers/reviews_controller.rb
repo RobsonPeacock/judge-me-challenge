@@ -36,6 +36,12 @@ class ReviewsController < ApplicationController
     redirect_to action: :index, shop_id: Product.find_by(id: review_params[:product_id]).shop_id
   end
 
+  def average
+    params[:shop_id] ||= 1
+    @shop = Shop.find(params[:shop_id])
+    @ratings = @shop.average_rating
+  end
+
   private
 
   # Prepend `params[:tags]` with tags of the shop (if present) or DEFAULT_TAGS

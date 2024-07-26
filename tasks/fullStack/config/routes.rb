@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
 
   resources :reviews, only: [:index, :create, :new]
+  get 'reviews/average', to: 'reviews#average'
 end
