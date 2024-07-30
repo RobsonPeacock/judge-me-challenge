@@ -1,8 +1,40 @@
-- @data.each do |datum|
-  .product-title
-    | Product #{datum[:product].title}
+.container-xl
+  .my-5
 
-  - datum[:reviews].each do |review|
-    .rating
-      | Rating #{review.rating}
-    p.body == review.body
+  .row
+    .col-lg-2.offset-lg-10
+      .btn-group.float-end.my-2
+        button.btn.btn-light.dropdown-toggle[type="button" data-bs-toggle="dropdown" aria-expanded="false"]
+          = @shop.name
+        ul.dropdown-menu
+          - @shops.each do |shop|
+            li
+              = link_to shop.name, reviews_path(shop_id: shop.id), class: 'dropdown-item'
+  
+    - @data.each do |datum|
+      .row.border-0.pad-bg
+        .col-lg-3
+          = image_tag 'https://placehold.co/300x300'
+          .product-title.pt-2
+            | Product #{datum[:product].title}
+          p  
+            = link_to 'Create Review', new_review_path(product_id: datum[:product].id)
+        .col-lg-9
+          - datum[:reviews].each do |review|
+            
+            .d-flex.py-1
+              div
+                .profile__picture[data-user-name="#{review.reviewer_name}"]
+
+              div.align-self-center.mx-2
+                = review.reviewer_name
+
+            .d-flex.py-1
+              div
+                - review.rating.to_i.times do
+                  i.fas.fa-1x.fa-star
+
+              div.align-self-center.mx-2
+                p.time-posted[data-date-now="#{Time.zone.now}" data-created-at="#{review.created_at}"]
+
+            p.body == review.body

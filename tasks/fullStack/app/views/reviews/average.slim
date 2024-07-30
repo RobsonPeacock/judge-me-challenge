@@ -1,0 +1,23 @@
+.container.my-5
+  .h1
+    = @shop.name
+
+  - if @shop.average_rating.length < 2
+    p
+      | No averages to display
+  
+  - else
+    table.table
+      thead
+        tr
+          th[scope="col"]
+            | Difference
+          th[scope="col"]
+            | Month
+      tbody
+        - @ratings.each_with_index do |rating, index|
+          tr
+            td
+              = rating
+            td
+              = "#{index + 1} month ago"

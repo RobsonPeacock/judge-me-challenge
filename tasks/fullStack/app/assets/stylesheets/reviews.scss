@@ -1,0 +1,55 @@
+$star_unselected: #ddd;
+$star_selected: #ffc107;
+$white: #fff;
+$background-color_1: #ccc;
+
+.pad-bg {
+	background: #f8f8f8;
+	padding: 40px 20px;
+	border-radius: 5px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	border: 1px solid #e5e5e5;
+}
+
+.rating {
+	direction: rtl;
+	unicode-bidi: bidi-override;
+	color: $star_unselected;
+	input {
+		display: none;
+		&:checked {
+			+ {
+				label {
+					color: $star_selected;
+					~ {
+						label {
+							color: $star_selected;
+						}
+					}
+				}
+			}
+		}
+	}
+	label {
+		&:hover {
+			color: $star_selected;
+			~ {
+				label {
+					color: $star_selected;
+				}
+			}
+		}
+	}
+}
+
+.profile__picture {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: $background-color_1;
+	color: $white;
+	text-align: center;
+	font-size: 2em;
+	line-height: 50px;
+}
